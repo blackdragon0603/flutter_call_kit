@@ -184,6 +184,7 @@ class FlutterCallKit {
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {
+    print('======== call kit: ${call.method}');
     switch (call.method) {
       case "didReceiveStartCallAction":
         if (_didReceiveStartCallAction == null) {
@@ -224,8 +225,12 @@ class FlutterCallKit {
           return null;
         }
         Map map = call.arguments.cast<String, dynamic>();
-        return _didDisplayIncomingCall(map["error"], map["callUUID"],
-            map["handle"], map["localizedCallerName"], map["fromPushKit"]);
+        return _didDisplayIncomingCall(
+            map["error"],
+            map["callUUID"],
+            map["handle"],
+            map["localizedCallerName"],
+            map["fromPushKit"] == '1');
       case "didPerformSetMutedCallAction":
         if (_didPerformSetMutedCallAction == null) {
           return null;
